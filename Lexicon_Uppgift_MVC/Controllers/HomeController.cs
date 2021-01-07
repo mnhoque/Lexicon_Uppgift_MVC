@@ -27,7 +27,57 @@ namespace Lexicon_Uppgift_MVC.Controllers
         {
             return View();
         }
-
+        public IActionResult About()
+        {
+            return View();
+        }
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        public IActionResult Projects()
+        {
+            return View();
+        }
+        //[HttpPost]
+        //public IActionResult CheckFever(string fname)
+        //{
+        //    double GetFrom = double.Parse(fname);
+        //    Temparature Human = new Temparature();
+        //    Human.HumanTemparature = 98.3;
+        //    ViewBag.name = GetFrom;
+        //    return View();
+        //}
+        public IActionResult CheckFever()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CheckFever(string fname)
+        {
+            double GetFrom = double.Parse(fname);
+            //Temparature.MyProperty=98.3;
+            Temparature.MyProperty = Temparature.Check(GetFrom);
+            ViewBag.name = Temparature.MyProperty;
+            return View();
+        }
+        int RandomNumber = 0;
+        public IActionResult GenarateNumber()
+        {
+            Random rand = new Random();
+            RandomNumber = rand.Next(1, 100);
+            ViewBag.number = RandomNumber;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult GenarateNumber(int fname)
+        {
+            //double GetFrom = double.Parse(fname);
+            Temparature Human = new Temparature();
+            //Human.HumanTemparature = 98.3;
+            ViewBag.name = fname;
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
