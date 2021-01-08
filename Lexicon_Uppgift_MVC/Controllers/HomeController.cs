@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Lexicon_Uppgift_MVC.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Lexicon_Uppgift_MVC.Controllers
 {
@@ -62,20 +63,40 @@ namespace Lexicon_Uppgift_MVC.Controllers
             return View();
         }
         int RandomNumber = 0;
+        GuessingGame game = new GuessingGame();
         public IActionResult GenarateNumber()
         {
-            Random rand = new Random();
-            RandomNumber = rand.Next(1, 100);
-            ViewBag.number = RandomNumber;
+            RandomNumber = game.GenerateRandomNumber();
+            HttpContext.Session.SetInt32("RandomNumber", RandomNumber);
+            ViewBag.number= HttpContext.Session.GetInt32("RandomNumber");
             return View();
         }
+        
+
+        //public object Session { get; private set; }
+
         [HttpPost]
-        public IActionResult GenarateNumber(int fname)
+        public IActionResult GenarateNumber(int fname, int? n1)
         {
+            n1= HttpContext.Session.GetInt32("RandomNumber");
+            string x = game.EnterList(fname,n1);
+            HttpContext.Session.SetString("SessionKeyName", x);
+            var name = HttpContext.Session.GetString("SessionKeyName");
+            ViewBag.name = name;
             //double GetFrom = double.Parse(fname);
-            Temparature Human = new Temparature();
-            //Human.HumanTemparature = 98.3;
-            ViewBag.name = fname;
+
+            //bool match = false;
+            //if (fname == RandomNumber)
+            //{
+            //    count++;
+            //    Session["Id"] = count;
+            //}
+            //while (match == false)
+            //{
+            //    count++;
+            //}
+
+            //ViewBag.name = count;
             return View();
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
