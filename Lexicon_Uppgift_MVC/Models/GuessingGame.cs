@@ -39,5 +39,11 @@ namespace Lexicon_Uppgift_MVC.Models
             }
             return message;
         }
+        public string EnterList(int ?number)
+        {
+            message = "null";
+            
+            return message;
+        }
     }
 }

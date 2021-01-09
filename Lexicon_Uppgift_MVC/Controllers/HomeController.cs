@@ -82,24 +82,33 @@ namespace Lexicon_Uppgift_MVC.Controllers
         [HttpPost]
         public IActionResult GenarateNumber(int fname, int? n1)
         {
-            int y = (int)HttpContext.Session.GetInt32("GuessCount") + 1;
-            n1 = HttpContext.Session.GetInt32("RandomNumber");
-            string x = game.EnterList(fname,n1);
-            HttpContext.Session.SetString("SessionKeyName", x);
-            
-            var name = HttpContext.Session.GetString("SessionKeyName");
-            
-            HttpContext.Session.SetInt32("GuessCount",y);
-            HttpContext.Session.GetInt32("GuessCount");
-            ViewBag.name = name + " and tries "+ HttpContext.Session.GetInt32("GuessCount")+ " times"; //+ guess_Count;
-            if (name == "You have win ")
+            if (fname != 0)
             {
-                HttpContext.Session.Clear();
-                //return RedirectToAction("Close",ViewBag.name);
-                return View("Close", ViewBag.name);
+                int y = (int)HttpContext.Session.GetInt32("GuessCount") + 1;
+                n1 = HttpContext.Session.GetInt32("RandomNumber");
+                string x = game.EnterList(fname, n1);
+                HttpContext.Session.SetString("SessionKeyName", x);
+
+                var name = HttpContext.Session.GetString("SessionKeyName");
+
+                HttpContext.Session.SetInt32("GuessCount", y);
+                HttpContext.Session.GetInt32("GuessCount");
+                ViewBag.name = name + " and tries " + HttpContext.Session.GetInt32("GuessCount") + " times"; //+ guess_Count;
+                if (name == "You have win ")
+                {
+                    HttpContext.Session.Clear();
+                    //return RedirectToAction("Close",ViewBag.name);
+                    return View("Close", ViewBag.name);
+                }
+
+                
             }
-            
+            else
+            {
+                ViewBag.name = "There is a error message";
+            }
             return View();
+
         }
         [HttpGet]
         public IActionResult Close()
