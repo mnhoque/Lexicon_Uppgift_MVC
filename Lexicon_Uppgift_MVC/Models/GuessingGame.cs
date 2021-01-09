@@ -9,31 +9,33 @@ namespace Lexicon_Uppgift_MVC.Models
     {
         public int MyProperty { get; set; }
         List<int> numbers = new List<int>();
-        int Count = 0;
-        int x = 0;
+        //static int Count = 0;
+        public int count { get; set; }
         public string message { get; set; }
 
         public int GenerateRandomNumber()
         {
             Random rand = new Random();
             MyProperty = rand.Next(1, 100);
-            x = MyProperty;
+            //x = MyProperty;
+            
             return MyProperty;
         }
 
         //Enter gessing numbers to the list
+        
 
         public string EnterList(int number,int? n1)
         {
-            Count++;
 
             if (number == n1)
             {
-                message = $"You have win and you tried {Count} times";
+                message = $"You have win ";
             }
             else
             {
                 numbers.Add(number);
+                message = $"You have not win because submitted number did not match with random number ";
             }
             return message;
         }
