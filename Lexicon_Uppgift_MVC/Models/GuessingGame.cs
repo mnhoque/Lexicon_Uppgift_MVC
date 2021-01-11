@@ -8,7 +8,7 @@ namespace Lexicon_Uppgift_MVC.Models
     public class GuessingGame
     {
         public int MyProperty { get; set; }
-        List<int> numbers = new List<int>();
+        
         //static int Count = 0;
         public int count { get; set; }
         public string message { get; set; }
@@ -34,7 +34,7 @@ namespace Lexicon_Uppgift_MVC.Models
             }
             else
             {
-                numbers.Add(number);
+                //numbers.Add(number);
                 message = $"You have not win because submitted number did not match with random number ";
             }
             return message;

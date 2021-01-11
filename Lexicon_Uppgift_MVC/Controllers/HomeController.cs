@@ -65,13 +65,15 @@ namespace Lexicon_Uppgift_MVC.Controllers
         int RandomNumber = 0;
         GuessingGame game = new GuessingGame();
         int count ;
+        List<int> numberList = new List<int>();
+        //List<int> numbers2 = new List<int>();
         public IActionResult GenarateNumber()
         {
             RandomNumber = game.GenerateRandomNumber();
             HttpContext.Session.SetInt32("RandomNumber", RandomNumber);
-
             count = 0;
             HttpContext.Session.SetInt32("GuessCount",count);
+            HttpContext.Session.Set<List<int>>("ComplexObject", numberList);
             ViewBag.number= HttpContext.Session.GetInt32("RandomNumber");
             return View();
         }
@@ -84,16 +86,28 @@ namespace Lexicon_Uppgift_MVC.Controllers
         {
             if (fname != 0)
             {
+                
                 int y = (int)HttpContext.Session.GetInt32("GuessCount") + 1;
                 n1 = HttpContext.Session.GetInt32("RandomNumber");
                 string x = game.EnterList(fname, n1);
+                if(x== "You have not win because submitted number did not match with random number ")
+                {
+                    var new_numberList = HttpContext.Session.Get<List<int>>("ComplexObject") as List<int>;
+                    new_numberList.Add(fname);
+                    HttpContext.Session.Set<List<int>>("ComplexObject", new_numberList);
+                    ViewBag.numbers = HttpContext.Session.Get<List<int>>("ComplexObject");
+                }
                 HttpContext.Session.SetString("SessionKeyName", x);
 
                 var name = HttpContext.Session.GetString("SessionKeyName");
-
+                
                 HttpContext.Session.SetInt32("GuessCount", y);
                 HttpContext.Session.GetInt32("GuessCount");
-                ViewBag.name = name + " and tries " + HttpContext.Session.GetInt32("GuessCount") + " times"; //+ guess_Count;
+                //HttpContext.Session.Get<List<int>>("ComplexObject");
+                
+                
+                ViewBag.name = name + " and tries " + HttpContext.Session.GetInt32("GuessCount") + " times";
+
                 if (name == "You have win ")
                 {
                     HttpContext.Session.Clear();
