@@ -20,6 +20,11 @@
 <p>
     @Html.ActionLink("Add", "Create")
 </p>
+<form action="Search">
+    <input type="text" placeholder="Enter a name " id="firstletter" name="firstletter">
+    @*<input type="" value="Find">*@
+    <input type="submit" value="Search" onclick="location.href='@Url.Action("Search", "Next")'" />
+</form>
 <table class="table">
     <tr>
         <th>First Name</th>
@@ -42,8 +47,8 @@
             </td>
             
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.EmpName }) |
-                @Html.ActionLink("Details", "Details", new { id = item.EmpName }) |
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.EmpName }) |*@
+                @*@Html.ActionLink("Details", "Details", new { id = item.EmpName }) |*@
                 @Html.ActionLink("Delete", "Delete", new { id = item.EmpName })
             </td>
         </tr>

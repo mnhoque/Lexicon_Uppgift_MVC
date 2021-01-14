@@ -11,9 +11,9 @@ namespace Lexicon_Uppgift_MVC.Controllers
     {
         List<Employee> listOfPeople = Employee.EmpList;
         List<Employee> selectedlist = new List<Employee>();
+
         public IActionResult ShowEmployees()
         {
-            
 
             foreach (var dir in listOfPeople)
             {
@@ -28,6 +28,20 @@ namespace Lexicon_Uppgift_MVC.Controllers
 
             return View(selectedlist);
             //return View();
+        }
+        
+        public IActionResult Search(string firstletter)
+        {
+            List<Employee> Individuallist = new List<Employee>();
+            foreach (var item in listOfPeople)
+            {
+                if (item.EmpName[0].ToString() == firstletter)
+                {
+                    Individuallist.Add(item);
+                }
+
+            }
+            return View(Individuallist);
         }
         public IActionResult Index()
         {
