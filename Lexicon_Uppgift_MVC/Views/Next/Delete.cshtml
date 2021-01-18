@@ -5,10 +5,17 @@
 
 <h1>Deleted Item is </h1>
 
-<div>
-    <h3>Name is : @Model.EmpName</h3>
-    <h3>RecordName: @Model.PhoneNumber</h3>
-    <h3>RecordDetail: @Model.City</h3>
 
-</div>
+<table class="table">
+    <tr>
+        <th>First Name</th>
+        <th>Phone Number</th>
+        <th>City</th>
+
+    </tr>
+    <tr>
+        @Html.Partial("_PertialEmployee", Model)
+    </tr>
+    
+    </table>
 <p><a href="/Next/ShowEmployees">Show all the employees now</a></p>

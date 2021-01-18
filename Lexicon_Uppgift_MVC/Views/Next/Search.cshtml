@@ -14,21 +14,9 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmpName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.EmpName })
-            </td>
-        </tr>
+<tr>
+    @Html.Partial("_PertialEmployee", item)
+</tr>
     }
 
 </table>

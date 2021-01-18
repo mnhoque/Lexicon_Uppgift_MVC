@@ -5,18 +5,18 @@
 
 <h1>ShowEmployees</h1>
 <p>There are now @ViewBag.sl employees</p>
-@*<div>
-    @foreach (var element in @Model)
-    {
-        <span>the name : @element.EmpName ,</span>
-        <span>the phone : @element.PhoneNumber ,</span>
-        <span>the city : @element.City</span>
+@*<div data-role="tile">
+        @foreach (var element in @Model)
+        {
+            <span>the name : @element.EmpName ,</span>
+            <span>the phone : @element.PhoneNumber ,</span>
+            <span>the city : @element.City</span>
 
-        //@Html.ActionLink("Delete Employee", "Delete", "Next", new { listIds = Model.Select(m => m.EmpName).ToList() })
-        @Html.ActionLink("Delete Employee", "Delete", "Next", new { id = element.EmpName }, null)
-        <br />
-    }
-</div>*@
+            //@Html.ActionLink("Delete Employee", "Delete", "Next", new { listIds = Model.Select(m => m.EmpName).ToList() })
+            @Html.ActionLink("Delete Employee", "Delete", "Next", new { id = element.EmpName }, null)
+            <br />
+        }
+    </div>*@
 <p>
     @Html.ActionLink("Add", "Create")
 </p>
@@ -30,29 +30,20 @@
         <th>First Name</th>
         <th>Last Name</th>
         <th>City</th>
-        
+
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmpName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            
-            <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.EmpName }) |*@
-                @*@Html.ActionLink("Details", "Details", new { id = item.EmpName }) |*@
-                @Html.ActionLink("Delete", "Delete", new { id = item.EmpName })
-            </td>
-        </tr>
+    <tr>
+        @Html.Partial("_PertialEmployee",item)
+    </tr>
     }
 
 </table>
+<div data-role="tile"></div>
+
+
+
+
 

@@ -33,9 +33,10 @@ namespace Lexicon_Uppgift_MVC.Controllers
         public IActionResult Search(string firstletter)
         {
             List<Employee> Individuallist = new List<Employee>();
+            
             foreach (var item in listOfPeople)
             {
-                if (item.EmpName[0].ToString() == firstletter)
+                if (item.EmpName[0].ToString() == firstletter.ToUpper())
                 {
                     Individuallist.Add(item);
                 }
